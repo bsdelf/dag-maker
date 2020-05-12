@@ -21,6 +21,7 @@
     "DAG",
     "directed acyclic graph",
     "topological sorting",
+    "dependency resolution",
     "graph",
     "vertex",
     "factory"
