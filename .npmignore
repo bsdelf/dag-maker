@@ -1,0 +1,16 @@
+.nyc_output
+.eslintrc
+.eslintignore
+.prettierrc
+tsconfig.tsbuildinfo
+tsconfig.json
+tsconfig
+src
+test
+coverage
+
+**/*.test.js
+**/*.test.js.map
+**/*.test.ts
+**/*.test.d.ts
+*.tgz

@@ -1,0 +1,54 @@
+{
+  "name": "dag-maker",
+  "version": "1.0.0",
+  "description": "DAG maker",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "tsc --build --clean",
+    "lint": "eslint --ext .js,.ts ./src",
+    "lint:fix": "eslint --fix --ext .js,.ts ./src",
+    "test": "npm run build && nyc ava",
+    "pack": "npm run build && npm pack",
+    "pack:dry-run": "npm run build && npm pack --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bsdelf/dag-maker.git"
+  },
+  "keywords": [
+    "DAG",
+    "directed acyclic graph",
+    "topological sorting",
+    "graph",
+    "vertex",
+    "factory"
+  ],
+  "author": "Yanhui Shen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bsdelf/dag-maker/issues"
+  },
+  "homepage": "https://github.com/bsdelf/dag-maker#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "@typescript-eslint/eslint-plugin": "2.31.0",
+    "@typescript-eslint/parser": "2.31.0",
+    "ava": "^3.8.2",
+    "eslint": "^6.0.0",
+    "nyc": "^15.0.1",
+    "typescript": "^3.8.3"
+  },
+  "ava": {
+    "failFast": true,
+    "verbose": true
+  },
+  "nyc": {
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  }
+}
