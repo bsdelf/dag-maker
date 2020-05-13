@@ -65,6 +65,9 @@ console.log(dagMaker.orderBy('dependents'));
 // [ [ 'B' ], [ 'A' ] ]
 
 const dag = await dagMaker.create();
+// create A
+// create B
+
 console.log(dag);
 // Map(2) { 'A' => A {}, 'B' => B { a: A {} } }
 
