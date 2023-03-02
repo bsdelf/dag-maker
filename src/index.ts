@@ -1,3 +1,15 @@
+export class VertexNotFoundError extends Error {
+  constructor(type: 'instance' | 'factory', name: string) {
+    super(`Vertex ${type} not found: ${name}`);
+  }
+}
+
+export class CircularDependencyError extends Error {
+  constructor(names: string[]) {
+    super(`Circular dependency error: ${names.join(',')}`);
+  }
+}
+
 /**
  * Set dependencies for target.
  * @param options Vertex factories.
@@ -125,7 +137,7 @@ export class DagMaker {
           const options = Object.entries(dependencies).reduce((acc, [name, factory]) => {
             const vertex = dag.get(factory.name);
             if (!vertex) {
-              throw new Error(`Vertex "${factory.name}" not found`);
+              throw new VertexNotFoundError('instance', factory.name);
             }
             return { ...acc, [name]: vertex };
           }, {});
@@ -149,7 +161,7 @@ export class DagMaker {
         if (vertex) {
           const metadata = this.vertexMetadataMap.get(name);
           if (!metadata) {
-            throw new Error(`Vertex factory "${name}" not found`);
+            throw new VertexNotFoundError('factory', name);
           }
           await metadata.factory.destroy(vertex);
         }
@@ -179,7 +191,7 @@ export class DagMaker {
         }
       }
       if (leaveNames.length === 0) {
-        throw new Error('Circular dependency detected');
+        throw new CircularDependencyError(leaveNames);
       }
       order.push(leaveNames.sort());
       // prune leaves
